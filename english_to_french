@@ -1,0 +1,22 @@
+!pip install ibm_watson
+apikey = 'V_hOg_Yi6Wb6oVjWYUOaAoNHf_8Y8BdbRMncAXB4Rz9I'
+url = 'https://api.au-syd.language-translator.watson.cloud.ibm.com/instances/73ed8908-ddc5-4b1d-b041-4ebe321adb6b'
+
+#import deps
+
+from ibm_watson import LanguageTranslatorV3
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+
+#set up service
+
+authenticator = IAMAuthenticator(apikey)
+lt = LanguageTranslatorV3(version = '2018-05-01', authenticator=authenticator)
+lt.set_service_url(url)
+
+def eng_to_french(text1):
+    """This function translates English to French"""
+    frenchtranslation = lt.translate(text=text1, model_id='en-fr').get_result()
+    return frenchtranslation
+    
+    translation1 = eng_to_french("How are you")
+    translation1
